@@ -42,9 +42,9 @@ namespace Notes_API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc();
-            app.UseCors("MyPolicy");
             
+            app.UseCors("MyPolicy");
+            app.UseMvc();
         }
     }
 }
