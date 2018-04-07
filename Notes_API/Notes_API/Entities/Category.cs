@@ -8,7 +8,11 @@ namespace Notes_API.Entities
 {
     public class Category
     {
-        [Key]
+        public Category()
+        {
+            Notes = new HashSet<Notes>();
+        }
+        
         public int Id { get; set; }
         public string Name { get; set; }
 
