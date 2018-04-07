@@ -24,7 +24,7 @@ namespace Notes_API.Controllers
         [HttpGet]
         public IEnumerable<User> GetUser()
         {
-            return _context.User;
+            return _context.User.ToList();
         }
 
         // GET: api/User/5

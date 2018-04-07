@@ -24,7 +24,7 @@ namespace Notes_API.Controllers
         [HttpGet]
         public IEnumerable<Category> GetCategory()
         {
-            return _context.Category;
+            return _context.Category.ToList();
         }
 
         // GET: api/Category/5

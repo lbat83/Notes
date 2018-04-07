@@ -24,7 +24,7 @@ namespace Notes_API.Controllers
         [HttpGet]
         public IEnumerable<Notes> GetNotes()
         {
-            return _context.Notes;
+            return _context.Notes.ToList();
         }
 
         // GET: api/Notes/5
