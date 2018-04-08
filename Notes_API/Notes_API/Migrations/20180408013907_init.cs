@@ -9,17 +9,13 @@ namespace Notes_API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Notes");
-
             migrationBuilder.CreateTable(
                 name: "Category",
-                schema: "Notes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,14 +24,13 @@ namespace Notes_API.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
-                schema: "Notes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,46 +39,41 @@ namespace Notes_API.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Notes",
-                schema: "Notes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CategoryId = table.Column<int>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Note = table.Column<string>(maxLength: 300, nullable: false),
-                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Note = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notes_CategoryId",
+                        name: "FK_Notes_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalSchema: "Notes",
                         principalTable: "Category",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Notes_UserId",
+                        name: "FK_Notes_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Notes",
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_CategoryId",
-                schema: "Notes",
                 table: "Notes",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_UserId",
-                schema: "Notes",
                 table: "Notes",
                 column: "UserId");
         }
@@ -91,16 +81,13 @@ namespace Notes_API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Notes",
-                schema: "Notes");
+                name: "Notes");
 
             migrationBuilder.DropTable(
-                name: "Category",
-                schema: "Notes");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "User",
-                schema: "Notes");
+                name: "User");
         }
     }
 }

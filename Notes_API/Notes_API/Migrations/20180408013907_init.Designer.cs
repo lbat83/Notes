@@ -11,7 +11,7 @@ using System;
 namespace Notes_API.Migrations
 {
     [DbContext(typeof(NotesContext))]
-    [Migration("20180407212423_init")]
+    [Migration("20180408013907_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,12 +26,11 @@ namespace Notes_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(50);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category","Notes");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Notes_API.Entities.Notes", b =>
@@ -41,18 +40,13 @@ namespace Notes_API.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime?>("CreatedOn");
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasMaxLength(300);
+                    b.Property<string>("Note");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Title");
 
                     b.Property<int>("UserId");
 
@@ -62,7 +56,7 @@ namespace Notes_API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notes","Notes");
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("Notes_API.Entities.User", b =>
@@ -70,20 +64,15 @@ namespace Notes_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime?>("CreatedOn");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User","Notes");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Notes_API.Entities.Notes", b =>
@@ -91,12 +80,12 @@ namespace Notes_API.Migrations
                     b.HasOne("Notes_API.Entities.Category", "Category")
                         .WithMany("Notes")
                         .HasForeignKey("CategoryId")
-                        .HasConstraintName("FK_Notes_CategoryId");
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Notes_API.Entities.User", "User")
                         .WithMany("Notes")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_Notes_UserId");
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
