@@ -11,7 +11,7 @@ using System;
 namespace Notes_API.Migrations
 {
     [DbContext(typeof(NotesContext))]
-    [Migration("20180429072452_Initial")]
+    [Migration("20180429095224_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,8 @@ namespace Notes_API.Migrations
 
                     b.Property<int?>("CategoryId");
 
-                    b.Property<DateTime?>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("Date");
 
                     b.Property<bool>("IsDeleted");
 
@@ -64,7 +65,8 @@ namespace Notes_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Email");
 

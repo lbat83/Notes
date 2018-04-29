@@ -9,11 +9,11 @@ namespace Notes_API.Entities
 {
     public class User
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime? CreatedOn { get; set; }
-
-        
+        [Column(TypeName = "Date")]
+        public DateTime CreatedOn { get; set; }        
     }
 }

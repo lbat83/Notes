@@ -12,10 +12,6 @@ namespace Notes_API.Entities
         {
 
         }
-
-        
-
-        
         
         public DbSet<User> User { get; set; }
         public DbSet<Notes> Notes { get; set; }

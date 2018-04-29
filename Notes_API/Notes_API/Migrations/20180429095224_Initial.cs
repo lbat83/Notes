@@ -28,7 +28,7 @@ namespace Notes_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "Date", nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -44,7 +44,7 @@ namespace Notes_API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CategoryId = table.Column<int>(nullable: true),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "Date", nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Note = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
