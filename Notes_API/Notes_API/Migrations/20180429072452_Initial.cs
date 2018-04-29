@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Notes_API.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,12 +43,12 @@ namespace Notes_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoryId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Note = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,13 @@ namespace Notes_API.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Notes_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

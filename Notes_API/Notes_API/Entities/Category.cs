@@ -9,11 +9,13 @@ namespace Notes_API.Entities
 {
     public class Category
     {
-       
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
+
         public int Id { get; set; }
         public string Name { get; set; }
 
-       public virtual ICollection<Notes> Notes { get; set; }
+        
     }
+
+
+
 }

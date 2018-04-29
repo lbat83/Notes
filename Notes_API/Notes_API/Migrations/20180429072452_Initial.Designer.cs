@@ -11,8 +11,8 @@ using System;
 namespace Notes_API.Migrations
 {
     [DbContext(typeof(NotesContext))]
-    [Migration("20180408013907_init")]
-    partial class init
+    [Migration("20180429072452_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,7 @@ namespace Notes_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int?>("CategoryId");
 
                     b.Property<DateTime?>("CreatedOn");
 
@@ -48,7 +48,7 @@ namespace Notes_API.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
@@ -78,14 +78,12 @@ namespace Notes_API.Migrations
             modelBuilder.Entity("Notes_API.Entities.Notes", b =>
                 {
                     b.HasOne("Notes_API.Entities.Category", "Category")
-                        .WithMany("Notes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Notes_API.Entities.User", "User")
-                        .WithMany("Notes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
