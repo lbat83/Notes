@@ -29,7 +29,8 @@ namespace Notes_API
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader();
+                       .AllowAnyHeader()
+                       .AllowCredentials();
             }));
             services.AddDbContext<NotesContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
