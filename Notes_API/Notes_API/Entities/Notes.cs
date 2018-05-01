@@ -14,7 +14,7 @@ namespace Notes_API.Entities
         public string Title { get; set; }
         public string Note { get; set; }
         [Column(TypeName = "Date")]
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public virtual Category Category { get; set; }
         public bool IsDeleted { get; set; }
         public virtual User User { get; set; }    

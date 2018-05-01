@@ -45,6 +45,7 @@ namespace Notes_API
             }
             
             app.UseCors("MyPolicy");
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
