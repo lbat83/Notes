@@ -35,11 +35,13 @@ namespace Notes_API
                        .AllowCredentials();
             }));
             services.AddDbContext<NotesContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddMvc();
+
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
             });
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +51,11 @@ namespace Notes_API
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.UseCors("MyPolicy");
-            app.UseStaticFiles();
+
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod()
+                                          .AllowCredentials());
             app.UseMvc();
         }
     }
