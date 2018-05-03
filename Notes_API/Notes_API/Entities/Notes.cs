@@ -13,10 +13,13 @@ namespace Notes_API.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }
-        [Column(TypeName = "Date")]
         public DateTime? CreatedOn { get; set; }
-        public virtual Category Category { get; set; }
+        public int CategoryId { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual User User { get; set; }    
+        public int UserId { get; set; }
+        
+        public Category category { get; set; }
+        public User user { get; set; } 
+
     }
 }
