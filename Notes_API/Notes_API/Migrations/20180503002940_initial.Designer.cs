@@ -11,8 +11,8 @@ using System;
 namespace Notes_API.Migrations
 {
     [DbContext(typeof(NotesContext))]
-    [Migration("20180429095224_Initial")]
-    partial class Initial
+    [Migration("20180503002940_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,10 +38,9 @@ namespace Notes_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<int>("CategoryId");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("Date");
+                    b.Property<DateTime?>("CreatedOn");
 
                     b.Property<bool>("IsDeleted");
 
@@ -49,7 +48,7 @@ namespace Notes_API.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -79,13 +78,15 @@ namespace Notes_API.Migrations
 
             modelBuilder.Entity("Notes_API.Entities.Notes", b =>
                 {
-                    b.HasOne("Notes_API.Entities.Category", "Category")
+                    b.HasOne("Notes_API.Entities.Category", "category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Notes_API.Entities.User", "User")
+                    b.HasOne("Notes_API.Entities.User", "user")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
