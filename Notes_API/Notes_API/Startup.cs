@@ -27,13 +27,14 @@ namespace Notes_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowCredentials();
-            }));
+                options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin());
+                options.AddPolicy("AllowAllHeaders", builder => builder.AllowAnyHeader());
+                options.AddPolicy("AllowAllMethods", builder => builder.AllowAnyMethod());
+                options.AddPolicy("AllowCredentials", builder => builder.AllowCredentials());
+            });
+
             services.AddDbContext<NotesContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddMvc();

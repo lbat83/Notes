@@ -10,12 +10,13 @@ namespace Notes_API.Entities
     {
         public NotesContext(DbContextOptions<NotesContext> options) : base(options)
         {
+           
 
         }
         
-        public DbSet<User> User { get; set; }
-        public DbSet<Notes> Notes { get; set; }
-        public DbSet<Category> Category { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Notes> Notes { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,7 +26,7 @@ namespace Notes_API.Entities
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(15)");
+                    .HasColumnType("int");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -37,19 +38,19 @@ namespace Notes_API.Entities
             {
                 entity.ToTable("notes");
 
-                entity.HasIndex(e => e.CategoryId)
+                entity.HasIndex(e => e.Categoryid)
                     .HasName("category_fk_idx");
 
-                entity.HasIndex(e => e.UserId)
+                entity.HasIndex(e => e.Userid)
                     .HasName("user_fk_idx");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(15)");
+                    .HasColumnType("int");
 
-                entity.Property(e => e.CategoryId)
+                entity.Property(e => e.Categoryid)
                     .HasColumnName("categoryid")
-                    .HasColumnType("int(10)");
+                    .HasColumnType("int");
 
                 entity.Property(e => e.CreatedOn)
                     .HasColumnName("created_on")
@@ -57,7 +58,7 @@ namespace Notes_API.Entities
 
                 entity.Property(e => e.IsDeleted)
                     .HasColumnName("is_deleted")
-                    .HasColumnType("tinyint(1)");
+                    .HasColumnType("tinyint");
 
                 entity.Property(e => e.Note)
                     .IsRequired()
@@ -69,13 +70,13 @@ namespace Notes_API.Entities
                     .HasColumnName("title")
                     .HasMaxLength(45);
 
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.Userid)
                     .HasColumnName("userid")
-                    .HasColumnType("int(10)");
+                    .HasColumnType("int");
 
-                entity.HasOne(d => d.category);
+                entity.HasOne(d => d.Category);
 
-                entity.HasOne(d => d.user);
+                entity.HasOne(d => d.User);
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -88,7 +89,7 @@ namespace Notes_API.Entities
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(10)");
+                    .HasColumnType("int");
 
                 entity.Property(e => e.CreatedOn)
                     .HasColumnName("created_on")

@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Notes_API.Entities;
 
+
 namespace Notes_API.Controllers
 {
-    [EnableCors("MyPolicy")]
+
     [Produces("application/json")]
     [Route("api/User")]
     public class UserController : Controller

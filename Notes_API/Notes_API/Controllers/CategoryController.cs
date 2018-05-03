@@ -10,7 +10,7 @@ using Notes_API.Entities;
 
 namespace Notes_API.Controllers
 {
-    [EnableCors("MyPolicy")]
+    
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class CategoryController : Controller
